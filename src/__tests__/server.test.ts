@@ -29,15 +29,47 @@ describe('/cards', () => {
 });
 
 describe('/cards/:cardId', () => {
-  describe('GET', () => {
-    test('should return an object', () => {
+	describe('GET', () => {
+		test('should return an object', () => {
+			return request(app)
+				.get('/cards/1')
+				.then((response) => {
+					expect(typeof response.body.card).toBe('object');
+				});
+		});
+		test('should return a card object of the correct format', () => {
+			return request(app)
+				.get('/cards/1')
+				.then((response) => {
+					expect(response.body.card).toEqual(
+						expect.objectContaining({
+							title: expect.any(String),
+							imageUrl: expect.any(String),
+							card_id: expect.any(String),
+							base_price: expect.any(Number),
+							availableSizes: expect.any(Array),
+							pages: expect.any(Array),
+						})
+					);
+				});
+		});
+		test('should return with a correct available sizes property', () => {
+			return request(app)
+				.get('/cards/1')
+				.then((response) => {
+					expect(response.body.card.availableSizes).toMatchObject({
+						id: expect.any(String),
+						title: expect.any(String),
+					});
+				});
+    });
+    test('should return with a correct pages property', () => {
       return request(app).get('/cards/1').then((response) => {
-        expect(typeof response.body.card).toBe('object')
-      })
+          expect(response.body.card.pages).toMatchObject({title: expect.any(String), templateId: expect.any(String)})
+        });
     })
-  });
-})
-
+	});
+});
 describe('Errors', () => {
 	test('status(404), responds with a path not found message when provided an incorrect path', () => {
 		return request(app)
