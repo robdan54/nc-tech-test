@@ -3,13 +3,10 @@
 const { fetchCards, fetchCardById } = require('../models/card-models');
 
 exports.getCards = (req, res, next) => {
-	fetchCards()
-		.then((cards) => {
-			res.status(200).send({ cards });
-		})
+	const { cardId } = req.params;
+	fetchCards(cardId)
+        .then((cards) => {
+                res.status(200).send({ cards });
+        })
 		.catch(next);
-};
-
-exports.getCard = (req, res, next) => {
-	res.status(200).send({card : {}})
 };
