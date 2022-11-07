@@ -33,6 +33,10 @@ exports.fetchCards = (cardId) => {
 					const card = cards.find(
 						(card) => parseInt(card.id.match(/(\d+)/)) == cardId //uses a regex to extract the unique number id
                     );
+                    if (!card) return Promise.reject({
+											status: 404,
+											msg: 'Card not found',
+										});
                     card.base_price = card.basePrice
                     card.availableSizes = card.sizes
                     card.card_id = card.id

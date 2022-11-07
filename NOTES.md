@@ -9,3 +9,5 @@ each endpoint was worked on in it's own git branch to allow work to be done with
 if given more time i would have like to have edited the test for the get cards by id endpoint to check that the returned pages have a valid template id
 
 The sizes data json is identical to the cards json, if given more time i would have fixed to match up the size ids with a title
+
+I would also have like to include more error paths i.e to check if the Card id is valid but not found, or just completely invalid
