@@ -25,7 +25,63 @@ describe('/cards', () => {
 					});
 				});
 		});
-	});
+  });
+  describe('POST', () => {
+    test('should return status 201, responds with the newly created card', () => {
+      const newCard = {
+				title: 'example title',
+				sizes: ['sm', 'md', 'gt'],
+				basePrice: 200,
+				pages: [
+					{
+						title: 'Front Cover',
+						templateId: 'template001',
+					},
+					{
+						title: 'Inside Left',
+						templateId: 'template002',
+					},
+					{
+						title: 'Inside Right',
+						templateId: 'template003',
+					},
+					{
+						title: 'Back Cover',
+						templateId: 'template004',
+					},
+				],
+			};
+      return request(app).post('/cards').send(newCard).expect(201).then((response) => {
+        expect(response.body.cards).toEqual(
+					expect.objectContaining({
+						title: 'example title',
+						imageUrl: '/back-cover-portrait.jpg',
+						card_id: expect.any(String),
+						base_price: 200,
+						availableSizes: ['sm', 'md', 'gt'],
+						pages: [
+							{
+								title: 'Front Cover',
+								templateId: 'template001',
+							},
+							{
+								title: 'Inside Left',
+								templateId: 'template002',
+							},
+							{
+								title: 'Inside Right',
+								templateId: 'template003',
+							},
+							{
+								title: 'Back Cover',
+								templateId: 'template004',
+							},
+						],
+					})
+				);
+      })
+    })
+  });
 });
 
 describe('/cards/:cardId', () => {
