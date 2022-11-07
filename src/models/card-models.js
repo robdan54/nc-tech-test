@@ -22,3 +22,10 @@ exports.fetchCards = () => {
 		});
 	});
 };
+
+// exports.fetchCardById = (cardId) => {
+//     return fs.readFile('src/data/cards.json', 'utf-8').then((rawCards) => {
+//         const cards = JSON.parse(rawCards)
+//         return cards.find((card) => card.id === cardId)
+//     });
+// }
