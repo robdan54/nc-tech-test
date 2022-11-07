@@ -1,7 +1,6 @@
 /** @format */
 
 const fs = require('fs/promises');
-const { title } = require('process');
 
 exports.fetchCards = (cardId) => {
 	return fs.readFile('src/data/cards.json', 'utf-8').then((rawCards) => {
@@ -46,6 +45,10 @@ exports.fetchCards = (cardId) => {
                     delete card.id
                     return card
 				}
-			});
+            });
 	});
 };
+
+exports.addCard = (newCard) => {
+    
+}
