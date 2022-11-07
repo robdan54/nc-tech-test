@@ -28,6 +28,16 @@ describe('/cards', () => {
 	});
 });
 
+describe('/cards/:cardId', () => {
+  describe('GET', () => {
+    test('should return an object', () => {
+      return request(app).get('/cards/1').then((response) => {
+        expect(typeof response.body.card).toBe('object')
+      })
+    })
+  });
+})
+
 describe('Errors', () => {
 	test('status(404), responds with a path not found message when provided an incorrect path', () => {
 		return request(app)
