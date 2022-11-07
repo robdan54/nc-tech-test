@@ -1,7 +1,7 @@
 /** @format */
 
 const express = require('express');
-const { getCards , getCard} = require('./controllers/card-controllers');
+const { getCards, postCard } = require('./controllers/card-controllers');
 const { handlesCustomErrors } = require('./controllers/error-controllers');
 
 const app = express();
@@ -10,6 +10,8 @@ app.use(express.json());
 app.set('json spaces', 2);
 
 app.get('/cards', getCards);
+app.post('/cards', postCard);
+
 app.get('/cards/:cardId', getCards)
 
 app.get('/cards/:cardId/:sizeId?', () => {
