@@ -1,8 +1,11 @@
+/** @format */
 
-const {fetchCards} = require('../models/card-models')
+const { fetchCards } = require('../models/card-models');
 
 exports.getCards = (req, res, next) => {
-    fetchCards().then((cards) => {
-        res.status(200).send({cards})
-    })
-}
+	fetchCards()
+		.then((cards) => {
+			res.status(200).send({ cards });
+		})
+		.catch(next);
+};
